@@ -4,7 +4,21 @@
 
 简体中文 | [English](#english)
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue) ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey) ![License](https://img.shields.io/badge/License-Unlicense-green)
+[![Release](https://img.shields.io/github/v/release/xwvyu/RapidClick?label=download&color=success)](https://github.com/xwvyu/RapidClick/releases/latest)
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
+![License](https://img.shields.io/badge/License-Unlicense-green)
+
+## 直接下载
+
+无需安装 Python，从 Release 下载 `RapidClick.exe` 即可运行：
+
+**[下载 RapidClick.exe](https://github.com/xwvyu/RapidClick/releases/latest/download/RapidClick.exe)**
+
+- 系统要求：64 位 Windows 10/11
+- 校验文件：[RapidClick.exe.sha256](https://github.com/xwvyu/RapidClick/releases/latest/download/RapidClick.exe.sha256)
+- 如 Windows SmartScreen 提示未识别应用，请先核对 Release 页面与校验文件中的 SHA-256
+- 本程序不会安装服务、添加开机启动项或写入系统目录
 
 ## 功能特性
 
@@ -19,14 +33,24 @@
 ## 环境要求
 
 - Windows 10/11
-- Python 3.8+
+- Python 3.8+（仅源码运行需要）
 
-## 安装与运行
+## 从源码运行
 
 ```bash
-pip install pynput customtkinter
+pip install -r requirements.txt
 python main.py
 ```
+
+## 从源码打包为 EXE
+
+在 Windows PowerShell 中运行：
+
+```powershell
+.\build.ps1
+```
+
+脚本会创建独立的构建虚拟环境，用 PyInstaller 打包为单文件 EXE，输出位于 `dist/RapidClick.exe`，并生成 SHA-256 校验文件。详细说明见 [WINDOWS_BINARY.md](WINDOWS_BINARY.md)。
 
 ## 使用说明
 
@@ -56,7 +80,13 @@ python main.py
 
 ```
 RapidClick/
-├── main.py       # 全部实现（GUI + 点击线程 + 热键监听 + 按键捕获）
+├── main.py                  # 全部实现（GUI + 点击线程 + 热键监听 + 按键捕获）
+├── requirements.txt         # 运行依赖（customtkinter, pynput）
+├── requirements-build.txt   # 打包依赖（含 PyInstaller）
+├── build.ps1                # Windows 一键打包脚本
+├── WINDOWS_BINARY.md        # 二进制下载与打包说明
+├── .github/workflows/
+│   └── build-windows.yml    # 打 v* 标签时自动构建并发布 Release
 └── .gitignore
 ```
 
@@ -72,6 +102,22 @@ RapidClick/
 
 A Windows auto-clicker for mouse buttons and keyboard keys, built with CustomTkinter + pynput.
 
+[![Release](https://img.shields.io/github/v/release/xwvyu/RapidClick?label=download&color=success)](https://github.com/xwvyu/RapidClick/releases/latest)
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
+![License](https://img.shields.io/badge/License-Unlicense-green)
+
+### Download
+
+No Python installation required — grab `RapidClick.exe` from the latest release:
+
+**[Download RapidClick.exe](https://github.com/xwvyu/RapidClick/releases/latest/download/RapidClick.exe)**
+
+- Requires 64-bit Windows 10/11
+- Checksum: [RapidClick.exe.sha256](https://github.com/xwvyu/RapidClick/releases/latest/download/RapidClick.exe.sha256)
+- If Windows SmartScreen warns about an unrecognized app, verify the SHA-256 against the checksum file on the Release page
+- The program does not install services, add startup entries, or write to system directories
+
 ### Features
 
 - **Mouse and keyboard**: Click the left/right mouse button, or any keyboard key (click the capture box, then press any key to set it)
@@ -85,14 +131,24 @@ A Windows auto-clicker for mouse buttons and keyboard keys, built with CustomTki
 ### Requirements
 
 - Windows 10/11
-- Python 3.8+
+- Python 3.8+ (only needed to run from source)
 
-### Install & Run
+### Run from source
 
 ```bash
-pip install pynput customtkinter
+pip install -r requirements.txt
 python main.py
 ```
+
+### Build an EXE from source
+
+In Windows PowerShell:
+
+```powershell
+.\build.ps1
+```
+
+The script creates an isolated build venv, packages the app into a single-file EXE with PyInstaller, outputs `dist/RapidClick.exe`, and generates a SHA-256 checksum. See [WINDOWS_BINARY.md](WINDOWS_BINARY.md) for details.
 
 ### Usage
 
@@ -124,7 +180,13 @@ granularity) and restores it afterwards. Measured (1 second per run):
 
 ```
 RapidClick/
-├── main.py       # Entire implementation (GUI + click thread + hotkey listener + key capture)
+├── main.py                  # Entire implementation (GUI + click thread + hotkey listener + key capture)
+├── requirements.txt         # Runtime dependencies (customtkinter, pynput)
+├── requirements-build.txt   # Build dependencies (includes PyInstaller)
+├── build.ps1                # One-command Windows build script
+├── WINDOWS_BINARY.md        # Binary download & build docs
+├── .github/workflows/
+│   └── build-windows.yml    # Auto-build & publish a Release on v* tags
 └── .gitignore
 ```
 
